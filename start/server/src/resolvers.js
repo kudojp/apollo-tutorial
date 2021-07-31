@@ -8,4 +8,4 @@ module.exports = {
 
     me: (_, __, { dataSources }) => dataSources.userAPI.findOrCreateUser()
   }
-}
+};
