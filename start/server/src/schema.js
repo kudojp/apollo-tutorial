@@ -6,6 +6,7 @@ const typeDefs = gql`
     launch(id: ID!): Launch
     # Queries for the current user.
     me: User
+  }
 
   type Launch {
     id: ID!
