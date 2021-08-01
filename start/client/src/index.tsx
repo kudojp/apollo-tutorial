@@ -22,5 +22,5 @@ ReactDOM.render(
     <Pages />
   </ApolloProvider>,
   document.getElementById('root')
-)
+);
 
