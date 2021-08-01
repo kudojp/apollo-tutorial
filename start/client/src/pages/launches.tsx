@@ -39,11 +39,13 @@ const Launches: React.FC<LaunchesProps> = () => {
   const {
     data,
     loading,
-    error
+    error,
+    fetchMore,
   } = useQuery<       // <>内では返ってくるdataの型を定義しているという認識
     GetLaunchListTypes.GetLaunchList,
     GetLaunchListTypes.GetLaunchListVariables
   >(GET_LAUNCHES);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   if (loading) return <Loading />;
   if (error) return <p>ERROR</p>;
@@ -58,6 +60,24 @@ const Launches: React.FC<LaunchesProps> = () => {
           <LaunchTile key={launch.id} launch={launch} />
         ))
       }
+
+      {data.launches && data.launches.hasMore && (
+        isLoadingMore
+          ? <Loading />
+          : <Button
+            onClick={async () => {
+              setIsLoadingMore(true);
+              await fetchMore({
+                variables: {
+                  after: data.launches.cursor,
+                },
+              });
+              setIsLoadingMore(false);
+            }}
+          >
+            Load More
+          </Button>
+      )}
     </Fragment>
   );
 }
