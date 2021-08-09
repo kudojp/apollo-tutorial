@@ -10,12 +10,13 @@ import ReactDOM from 'react-dom';
 import Pages from './pages';
 import injectStyles from './styles';
 
+// client graphqlスキーマ
 export const typeDefs = gql`
   extend type Query {
     isLoggedIn: Boolean!
-    catItems: [ID!]!
+    cartItems: [ID!]!
   }
-`;
+`
 
 const client = new ApolloClient<NormalizedCacheObject>({
   cache,
